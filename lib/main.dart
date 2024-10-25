@@ -11,6 +11,7 @@ void main() async {
       appId: "1:514779891364:web:210eec466b0db31b844831",
       messagingSenderId: "514779891364",
       projectId: "image-gallery-web",
+      storageBucket: "image-gallery-web.appspot.com",
     ),
   );
 
