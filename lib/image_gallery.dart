@@ -14,15 +14,17 @@ class ImageGallery extends StatefulWidget {
 
 class _ImageGalleryState extends State<ImageGallery> {
   Uint8List? _image;
-  String? _imageName = "imagem.jpg";
+  String? _imageName;
   bool? loading;
 
   Future<void> _pickeImage() async {
     final ImagePickerPlugin _picker = ImagePickerPlugin();
-    final picketFile =
+    final pickedFile =
         await _picker.getImageFromSource(source: ImageSource.gallery);
-    if (picketFile != null) {
-      final bytes = await picketFile.readAsBytes();
+    if (pickedFile != null) {
+      final bytes = await pickedFile.readAsBytes();
+
+      _imageName = pickedFile.name;
 
       setState(() {
         _image = bytes;
