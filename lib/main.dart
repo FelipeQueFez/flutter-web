@@ -4,6 +4,40 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'image_gallery.dart';
 
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Colors.black,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+    ),
+  ),
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 32,
+      color: Colors.grey,
+    ),
+  ),
+);
+
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.blue,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white,
+    ),
+  ),
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 32,
+      color: Colors.pink,
+    ),
+  ),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -20,6 +54,11 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  static void setTheme(BuildContext context, ThemeData theme) {
+    var state = context.findAncestorStateOfType<_MyAppState>();
+    state?.changeTheme(theme);
+  }
+
   static void setLocale(BuildContext context, Locale newLocale) {
     var state = context.findAncestorStateOfType<_MyAppState>();
     state?.changeLocale(newLocale);
@@ -31,6 +70,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale = const Locale('en');
+  ThemeData _themeData = lightTheme;
+
+  void changeTheme(ThemeData theme) {
+    setState(() {
+      _themeData = theme;
+    });
+  }
 
   void changeLocale(Locale newLocale) {
     setState(() {
@@ -44,6 +90,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Image gallery app',
       home: ImageGallery(),
       locale: _locale,
+      theme: _themeData,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
