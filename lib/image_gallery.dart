@@ -117,20 +117,23 @@ class _ImageGalleryState extends State<ImageGallery> {
               }
             },
           ),
-          PopupMenuButton(onSelected: (String value) {
-            if (value == "English") {
-              _changeLanguage(Locale('en'));
-            } else if (value == "Português") {
-              _changeLanguage(Locale('pt'));
-            }
-          }, itemBuilder: (BuildContext context) {
-            return {'English', 'Português'}.map((String choice) {
-              return PopupMenuItem(
-                value: choice,
-                child: Text(choice),
-              );
-            }).toList();
-          }),
+          PopupMenuButton(
+              icon: Icon(Icons.language),
+              onSelected: (String value) {
+                if (value == "English") {
+                  _changeLanguage(Locale('en'));
+                } else if (value == "Português") {
+                  _changeLanguage(Locale('pt'));
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return {'English', 'Português'}.map((String choice) {
+                  return PopupMenuItem(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              }),
         ],
       ),
       body: Stack(
